@@ -1,13 +1,56 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import '~@csstools/normalize.css';
+
+/* bring in normalize.css styles */
+:root {
+  /* --primary-text-color: #757575; */
+  --primary-text-color: #8e9a9a;
+  --secondary-text-color: #212121;
+  --accent-color: #ba571d;
+
+  --primary-bg-color: #160e11;
+  --title-text-color: #5d4035;
+  --primary-white-color: #ffffff;
+  --primary-black-color: #000000;
+  --hero-bg-color: #2f303a;
+  --footer-contacts-color: rgba(255, 255, 255, 0.6);
+  --button-bg-color: #1e496d;
+
+  --icon-color: #afb1b8;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* p,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+} */
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  height: auto;
+  display: block;
+  max-width: 100%;
+}
+
+body {
+  font-family: Roboto, sans-serif;
+  letter-spacing: 0.03em;
+  background-color: var(primary-white-color);
+  color: var(--primary-bg-color);
+}
+
+
+a,
+li {
+  text-decoration: none;
 }

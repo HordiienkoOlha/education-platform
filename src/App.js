@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import { lazy } from 'react';
 
-function App() {
+const AppBar = lazy(() => import('components/AppBar/AppBar'));
+const Courses = lazy(() => import('components/Courses'));
+
+const Lesson = lazy(() => import('components/Lesson'));
+
+const NotFoundView = lazy(() => import('views/NotFoundView'));
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<AppBar />}>
+        {/* <Route path="/" element={<Courses />} /> */}
+        <Route index element={<Courses />} />
+        <Route path="/lesson" element={<Lesson />} />
+      </Route>
+      <Route path="*" element={<NotFoundView />} />
+    </Routes>
   );
-}
+};
 
 export default App;
