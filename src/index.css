@@ -1,21 +1,25 @@
 @import '~@csstools/normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
-/* bring in normalize.css styles */
 :root {
-  /* --primary-text-color: #757575; */
   --primary-text-color: #8e9a9a;
-  --secondary-text-color: #212121;
+  --secondary-text-color: #160e11;
   --accent-color: #ba571d;
+  /* --primary-black-color: #160e11; */
 
-  --primary-bg-color: #160e11;
-  --title-text-color: #5d4035;
-  --primary-white-color: #ffffff;
-  --primary-black-color: #000000;
-  --hero-bg-color: #2f303a;
-  --footer-contacts-color: rgba(255, 255, 255, 0.6);
-  --button-bg-color: #1e496d;
 
-  --icon-color: #afb1b8;
+  --icon-color: #551a8b;
+
+  /* --primary-text-color: #757575; */
+  /* --secondary-text-color: #212121; */
+
+  /* --primary-bg-color: #160e11; */
+  /* --title-text-color: #5d4035; */
+  /* --primary-white-color: #ffffff; */
+  /* --hero-bg-color: #2f303a; */
+  /* --footer-contacts-color: rgba(255, 255, 255, 0.6); */
+  /* --button-bg-color: #1e496d; */
+/*  */
 }
 
 /* p,
@@ -43,10 +47,10 @@ img {
 }
 
 body {
-  font-family: Roboto, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   letter-spacing: 0.03em;
-  background-color: var(primary-white-color);
-  color: var(--primary-bg-color);
+  background-color: var(--primary-white-color);
+  color: var(--secondary-text-color);
 }
 
 

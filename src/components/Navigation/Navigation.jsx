@@ -1,5 +1,5 @@
 import { NavLink, Link } from 'react-router-dom';
-// import { IconContext } from 'react-icons';
+import SchoolIcon from '@mui/icons-material/School';
 // import { ImFilm } from 'react-icons/im';
 
 import styles from './Navigation.module.css';
@@ -9,14 +9,7 @@ const Navigation = () => {
     <nav className={styles.nav}>
       <div className={styles.icon}>
         <Link to="/">
-          {/* <IconContext.Provider
-            value={{ color: '#1e496d', style: { verticalAlign: 'middle' } }}
-          >
-            <div>
-              <ImFilm size={50}/>
-            </div>
-          </IconContext.Provider> */}
-          Courses
+          <SchoolIcon sx={{ fontSize: 30 }}/>
         </Link>
       </div>
       <ul className={styles.list}>
