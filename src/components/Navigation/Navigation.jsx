@@ -1,42 +1,19 @@
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import SchoolIcon from '@mui/icons-material/School';
-// import { ImFilm } from 'react-icons/im';
 
 import styles from './Navigation.module.css';
 
 const Navigation = () => {
   return (
     <nav className={styles.nav}>
-      <div className={styles.navContent}>   
-      <div className={styles.icon}>
-        <Link to="/">
-          <SchoolIcon sx={{ fontSize: 30 }}/>
-        </Link>
-      </div>
-      <ul className={styles.list}>
-        <li>
-          <NavLink
-            exact="true"
-            to="/"
-            className={({ isActive }) =>
-              isActive ? styles['active-link'] : styles.link
-            }
-          >
-            Courses
-          </NavLink>
-        </li>
-        <li className={styles.movie}>
-          <NavLink
-            to="/lesson"
-            className={({ isActive }) =>
-              isActive ? styles['active-link'] : styles.link
-            }
-          >
-            Lesson
-          </NavLink>
-        </li>
-        </ul>
+      <Link to="/">
+        <div className={styles.content}>
+          <div className={styles.icon}>
+            <SchoolIcon sx={{ fontSize: 40 }} />
+          </div>
+          <p className={styles.title}>Education platform</p>
         </div>
+      </Link>
     </nav>
   );
 };

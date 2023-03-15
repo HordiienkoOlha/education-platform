@@ -1,17 +1,19 @@
 .nav {
   display: flex;
+  justify-content: center;
   align-items: center;
   padding: 20px;
 }
 
-.navContent {
+.content {
   display: flex;
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-left: auto;
+  margin-right: auto; */
+  
 }
 
-.list {
-  color: var(--secondary-text-color);
+.title {
+  color: var(--icon-color);
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   font-size: 35px;
@@ -19,6 +21,7 @@
 
   display: flex;
   list-style: none;
+  margin-left: 20px;
 }
 
 .icon {
@@ -39,18 +42,18 @@
   text-decoration: none;
   padding: 12px;
   font-weight: 900;
-  color: var(--primary-text-color);
+  color: var(--icon-color);
   font-size: 18px;
 }
 
 .link:focus,
 .link:hover {
-  color: var(--icon-color);
+  color: var(--accent-color);
 }
 
 .active-link {
   composes: link;
-  color: var(--accent-color);
+  /* color: var(--accent-color); */
 }
 @media screen and (min-width: 375px) {
   .movie {

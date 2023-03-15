@@ -5,6 +5,7 @@ import * as api from '../../services/api';
 import Spiner from 'components/Spiner';
 import styles from './CoursesList.module.css';
 import scrollToTop from 'helpers/scrollToTop';
+import { Link } from 'react-router-dom';
 
 const CoursesList = () => {
   const [courses, setCourses] = useState([]);
@@ -63,24 +64,29 @@ const CoursesList = () => {
                           const { skills } = meta;
                           return (
                             <li key={id} className={styles.item}>
-                              <div>
+                              
+                              <Link  to={`/courses/${id}`}><div>
                                 <img
                                   src={`${previewImageLink}/cover.webp`}
                                   alt={title}
                                   className={styles.image}
                                 />
                               </div>
-                              <div>
-                                <h2 className={styles.text}>{title}</h2>
-                                <p>LessonsCount: {lessonsCount}</p>
-                                <h3>Skills:</h3>
-                                <ul>
+                                <div className={styles.content}>
+                                  {/* <div className={styles.contentTitleWrapper}> */}
+
+                                <h2 className={styles.contentTitle}>{title}</h2>
+                                  {/* </div> */}
+                                <p className={styles.contentText}>LessonsCount: {lessonsCount}</p>
+                                <h3 className={styles.contentText}>Skills:</h3>
+                                <ul className={styles.contentText}>
                                   {skills?.map((skill, index) => (
                                     <li key={index}>- {skill}</li>
                                   ))}
                                 </ul>
-                                <p>Rating: {rating}</p>
-                              </div>
+                                <p className={styles.contentText}>Rating: {rating}</p>
+                                </div>
+                                </Link>
                             </li>
                           );
                         }
