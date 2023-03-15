@@ -1,10 +1,6 @@
 const HomeView = () => {
   return (
     <>
-      {/* <Container>
-        <Hero />
-        <MoviesList />
-      </Container> */}
       <h2>Lesson</h2>
     </>
   );

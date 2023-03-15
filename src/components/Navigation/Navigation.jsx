@@ -7,6 +7,7 @@ import styles from './Navigation.module.css';
 const Navigation = () => {
   return (
     <nav className={styles.nav}>
+      <div className={styles.navContent}>   
       <div className={styles.icon}>
         <Link to="/">
           <SchoolIcon sx={{ fontSize: 30 }}/>
@@ -34,7 +35,8 @@ const Navigation = () => {
             Lesson
           </NavLink>
         </li>
-      </ul>
+        </ul>
+        </div>
     </nav>
   );
 };

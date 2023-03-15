@@ -1,6 +1,13 @@
 .nav {
   display: flex;
   align-items: center;
+  padding: 20px;
+}
+
+.navContent {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .list {
@@ -11,18 +18,16 @@
   line-height: 1.19;
 
   display: flex;
-  justify-content: space-around;
-  margin: auto;
-  align-items: center;
-
   list-style: none;
 }
 
 .icon {
+  display: flex;
+  align-items: center;
+  align-content: baseline;
   color: var(--icon-color);
   vertical-align: bottom;
-  /* padding-top: 7px; */
-  margin-left: 20px;
+  /* margin-left: 20px; */
 }
 .icon :hover,
 .icon:focus {
@@ -38,14 +43,23 @@
   font-size: 18px;
 }
 
-.link:focus, .link:hover{
+.link:focus,
+.link:hover {
   color: var(--icon-color);
-}
-.movie {
-  margin-left: 50px;
 }
 
 .active-link {
   composes: link;
   color: var(--accent-color);
+}
+@media screen and (min-width: 375px) {
+  .movie {
+    margin-left: 50px;
+  }
+}
+
+@media screen and (min-width: 4255px) {
+  .icon {
+    margin-left: 50px;
+  }
 }

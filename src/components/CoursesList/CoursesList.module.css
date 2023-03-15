@@ -1,0 +1,48 @@
+.title {
+    margin-left: 50px;
+    padding: 20px 0;
+}
+
+.listWrapper {
+    margin: auto;
+}
+
+.item {
+    border: 1px solid rgba(238, 238, 238, 1);
+    margin-bottom: 15px;
+    padding: 10px;
+    max-width: 300px;
+}
+
+.item:last-child {
+    margin-bottom: 0;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+@media screen and (min-width: 768px) {
+    .list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-bottom: -30px;
+        margin-left: -30px;
+        margin-top: 50px;
+    }
+
+    .item {
+        flex-basis: auto;
+        margin-bottom: 15px;
+        margin-left: 15px;
+        padding: 30px;
+    }
+    .pagination{
+        margin-top: 60px;
+    }
+}

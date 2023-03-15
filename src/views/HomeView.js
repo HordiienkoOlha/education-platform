@@ -1,12 +1,11 @@
 import Container from 'components/Container';
+import CoursesList from 'components/CoursesList';
 
 const HomeView = () => {
   return (
     <>
       <Container>
-        {/* <Hero />
-        <MoviesList /> */}
-        <h1>HomeView</h1>
+        <CoursesList />
       </Container>
     </>
   );

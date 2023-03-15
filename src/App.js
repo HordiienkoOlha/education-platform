@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import { lazy } from 'react';
 
 const AppBar = lazy(() => import('components/AppBar/AppBar'));
-const Courses = lazy(() => import('components/Courses'));
+const CoursesList = lazy(() => import('components/CoursesList'));
 
 const Lesson = lazy(() => import('components/Lesson'));
 
@@ -12,8 +12,8 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<AppBar />}>
-        {/* <Route path="/" element={<Courses />} /> */}
-        <Route index element={<Courses />} />
+        <Route path="/" element={<CoursesList />} />
+        <Route index element={<CoursesList />} />
         <Route path="/lesson" element={<Lesson />} />
       </Route>
       <Route path="*" element={<NotFoundView />} />

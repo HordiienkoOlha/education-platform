@@ -13,9 +13,11 @@ const AppBar = () => {
           <Navigation />
         </Container>
       </header>
-      <Suspense fallback={<Spinner />}>
-        <Outlet />
-      </Suspense>
+      <Container>
+        <Suspense fallback={<Spinner />}>
+          <Outlet />
+        </Suspense>
+      </Container>
     </>
   );
 };
