@@ -26,3 +26,14 @@ export const fetchCourses = async () => {
     console.error(error);
   }
 };
+
+export const fetchCourseIdDetails = async courseId => {
+  try {
+    await fetchToken();
+    const response = await axios.get(`core/preview-courses/${courseId}`);
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};

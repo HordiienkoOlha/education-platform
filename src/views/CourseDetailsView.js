@@ -1,7 +1,9 @@
+import CourseDetails from 'components/CourseDetails';
+
 const CourseDetailsView = () => {
   return (
     <>
-      <h2>Lesson</h2>
+      <CourseDetails />
     </>
   );
 };

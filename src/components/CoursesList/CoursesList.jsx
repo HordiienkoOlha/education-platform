@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react';
 import usePagination from 'hooks/usePagination';
+import { Button } from '@mui/material';
 
-import * as api from '../../services/api';
+import * as api from 'services/api';
 import Spiner from 'components/Spiner';
 import styles from './CoursesList.module.css';
 import scrollToTop from 'helpers/scrollToTop';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const CoursesList = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+
+    const navigate = useNavigate();
   const {
     firstContentIndex,
     lastContentIndex,
@@ -61,32 +64,59 @@ const CoursesList = () => {
                           meta,
                           rating,
                         }) => {
+                          // const { skills, courseVideoPreview } = meta;
                           const { skills } = meta;
                           return (
                             <li key={id} className={styles.item}>
-                              
-                              <Link  to={`/courses/${id}`}><div>
+                              {/* <Link to={`/courses/${id}`}> */}
+                                {/* <div className={styles.itemContent}> */}
                                 <img
                                   src={`${previewImageLink}/cover.webp`}
                                   alt={title}
                                   className={styles.image}
                                 />
-                              </div>
+
                                 <div className={styles.content}>
                                   {/* <div className={styles.contentTitleWrapper}> */}
 
-                                <h2 className={styles.contentTitle}>{title}</h2>
+                                  <h2 className={styles.contentTitle}>
+                                    {title}
+                                  </h2>
                                   {/* </div> */}
-                                <p className={styles.contentText}>LessonsCount: {lessonsCount}</p>
-                                <h3 className={styles.contentText}>Skills:</h3>
-                                <ul className={styles.contentText}>
-                                  {skills?.map((skill, index) => (
-                                    <li key={index}>- {skill}</li>
-                                  ))}
-                                </ul>
-                                <p className={styles.contentText}>Rating: {rating}</p>
+                                  <p className={styles.contentText}>
+                                    LessonsCount: {lessonsCount}
+                                  </p>
+                                  <h3 className={styles.contentText}>
+                                    Skills:
+                                  </h3>
+                                  <ul className={styles.contentText}>
+                                    {skills?.map((skill, index) => (
+                                      <li key={index}>- {skill}</li>
+                                    ))}
+                                  </ul>
+                                  <p className={styles.contentText}>
+                                    Rating: {rating}
+                                  </p>
                                 </div>
-                                </Link>
+                                <div>
+                                  {/* <VideoPlayer
+                                    courseVideoPreview={courseVideoPreview}
+                                  /> */}
+                                  {/* <div className="player-wrapper">
+                                    <ReactPlayer
+                                      className="react-player"
+                                      url={courseVideoPreview.link}
+                                      width="100%"
+                                      height="100%"
+                                    />
+                                  </div> */}
+                                <Button variant="outlined" color="warning"
+                                  onClick={()=>navigate(`/courses/${id}`)}>
+                                    Course details
+                                  </Button>
+                                  {/* </div> */}
+                                </div>
+                              {/* </Link> */}
                             </li>
                           );
                         }
@@ -103,14 +133,13 @@ const CoursesList = () => {
                   <button
                     onClick={() => {
                       setPage(1);
-                          scrollToTop();
+                      scrollToTop();
                     }}
                     className={`page ${page === 1 && 'disabled'}`}
                   >
                     1
                   </button>
                   {gaps.before ? '...' : null}
-                  {/* @ts-ignore */}
                   {gaps.paginationGroup.map(course => (
                     <button
                       onClick={() => {

@@ -8,11 +8,22 @@
 }
 
 .item {
-  border: 1px solid rgba(238, 238, 238, 1);
+  border: 1px solid var(--primary-text-color);
   margin-bottom: 15px;
-  padding: 10px;
   max-width: 299px;
+  padding: 10px;
 }
+
+.itemContent {
+
+}
+
+
+
+/* .itemContent:focus,
+.itemContent:hover {
+  scale: 1.1;
+} */
 
 .item:last-child {
   margin-bottom: 0;
@@ -24,7 +35,6 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 1.19;
-
 }
 
 .contentTitleWrapper {

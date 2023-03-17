@@ -14,7 +14,10 @@ const App = () => {
       <Route path="/" element={<AppBar />}>
         <Route index element={<HomeView />} />
         {/* <Route index element={<CoursesList />} /> */}
-        <Route path="/course/:courseId" element={<CourseDetailsView />}></Route>
+        <Route
+          path="/courses/:courseId"
+          element={<CourseDetailsView />}
+        ></Route>
       </Route>
       <Route path="*" element={<NotFoundView />} />
     </Routes>
