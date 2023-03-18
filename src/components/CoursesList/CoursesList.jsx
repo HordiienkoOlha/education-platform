@@ -111,7 +111,7 @@ const CoursesList = () => {
                                     />
                                   </div> */}
                                 <Button variant="outlined" color="warning"
-                                  onClick={()=>navigate(`/courses/${id}`)}>
+                                  onClick={()=>navigate(`/${id}`)}>
                                     Course details
                                   </Button>
                                   {/* </div> */}

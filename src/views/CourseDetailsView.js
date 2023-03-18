@@ -1,9 +1,12 @@
+import { Container } from '@mui/material';
 import CourseDetails from 'components/CourseDetails';
 
 const CourseDetailsView = () => {
   return (
     <>
-      <CourseDetails />
+      <Container>
+        <CourseDetails />
+      </Container>
     </>
   );
 };

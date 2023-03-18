@@ -1,25 +1,48 @@
 import { Route, Routes } from 'react-router-dom';
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
+import Spiner from 'components/Spiner';
 
 const AppBar = lazy(() => import('components/AppBar/AppBar'));
 const HomeView = lazy(() => import('views/HomeView'));
-
 const CourseDetailsView = lazy(() => import('views/CourseDetailsView'));
-
 const NotFoundView = lazy(() => import('views/NotFoundView'));
 
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<AppBar />}>
-        <Route index element={<HomeView />} />
-        {/* <Route index element={<CoursesList />} /> */}
+      <Route
+        path="/"
+        element={
+          <Suspense fallback={<Spiner />}>
+            <AppBar />
+          </Suspense>
+        }
+      >
         <Route
-          path="/courses/:courseId"
-          element={<CourseDetailsView />}
-        ></Route>
+          index
+          element={
+            <Suspense fallback={<Spiner />}>
+              <HomeView />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/:courseId"
+          element={
+            <Suspense fallback={<Spiner />}>
+              <CourseDetailsView />
+            </Suspense>
+          }
+        />
       </Route>
-      <Route path="*" element={<NotFoundView />} />
+      <Route
+        path="*"
+        element={
+          <Suspense fallback={<Spiner />}>
+            <NotFoundView />
+          </Suspense>
+        }
+      />
     </Routes>
   );
 };

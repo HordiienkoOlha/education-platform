@@ -1,9 +1,9 @@
 // import React, { useState } from 'react';
 
-// export const VideoPlayer = ({ courseVideoPreview }) => {
-  // console.log(courseVideoPreview)
+// export dafault VideoPlayer = ({ firstVideoLink }) => {
+//   // console.log(courseVideoPreview)
 
-  //     const { link, previewImageLink}=courseVideoPreview
+//       // const { link, previewImageLink}=courseVideoPreview
 //   const [videoUrl, setVideoUrl] = useState(courseVideoPreview.link);
 
 //   function handleVideoLoad(event) {
@@ -31,8 +31,8 @@
 //   videoEl.muted = false;
 // });
 
-//   return (
-//     <div>
+  // return (
+  //   <div>
       {/* <video
         id="video"
         controls
@@ -44,10 +44,11 @@
         onMouseLeave={handleMouseLeave}
         onChange={handleVideoLoad}
       /> */}
-    //   <video controls autoPlay={true} muted={true}>
-    //     <source
-    //       src={courseVideoPreview.link}
-        //   type="video/webm"
+//       <video controls src={firstVideoLink} ></video>
+//       <video controls autoPlay={true} muted={true}>
+//         <source
+//           src={firstVideoLink}
+//           type="video/webm"
 //         />
 //       </video>
 //     </div>

@@ -21,6 +21,7 @@ export const fetchCourses = async () => {
   try {
     await fetchToken();
     const response = await axios.get('/core/preview-courses');
+    console.log(response.data.courses);
     return response.data.courses;
   } catch (error) {
     console.error(error);

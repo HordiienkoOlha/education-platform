@@ -1,57 +1,38 @@
 import { useState, useEffect } from 'react';
 import {
-  // NavLink,
-  // Outlet,
   useParams,
-  // useLocation,
   useNavigate,
+  // Link,
+  useLocation,
+  Outlet,
 } from 'react-router-dom';
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
-// import { BiArrowBack } from 'react-icons/bi';
+
 import * as api from '../../services/api';
 
-// import { IMG_URL, ANOTHER_IMG } from 'constants/constants';
-// import Spiner from 'components/Spiner';
-// import Container from 'components/Container';
 import styles from './CourseDetails.module.css';
 import Spiner from 'components/Spiner';
 import { Button } from '@mui/material';
+import LessonDetails from 'components/LessonDetails';
 
 const CourseDetails = () => {
-  const [courseDetails, setCourseDetails] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [courseDetails, setCourseDetails] = useState(null);
+  const [firstVideoLink, setFirstVideoLink] = useState('');
+  const [showLesson, setShowLesson] = useState(false);
+
   const { courseId } = useParams();
+  // const location = useLocation();
   const navigate = useNavigate();
-  console.log(courseDetails);
 
   useEffect(() => {
-    setLoading(true);
-    api
-      .fetchCourseIdDetails(courseId)
-      .then(setCourseDetails)
-      .finally(setLoading(false));
+    api.fetchCourseIdDetails(courseId).then(data => {
+      setCourseDetails(data);
+      setFirstVideoLink(data.lessons[0].link);
+    });
   }, [courseId]);
 
-  const { title } = courseDetails;
+  // data.lessons.filter(({status})=>{if{status === "locked"}})
 
-  // const poster = IMG_URL + poster_path;
-
-  // const releaseTranform = () => {
-  //   if (release_date === null) {
-  //     return;
-  //   }
-  //   const releaseDate = String(release_date).slice(0, 4);
-  //   const releaseYear = '(' + releaseDate + ')';
-  //   return releaseYear;
-  // };
-  // const voteAverageTransform = () => {
-  //   if (vote_average === null) {
-  //     return;
-  //   }
-  //   const voteAverage = parseInt(vote_average * 10);
-  //   const votePercentage = String(voteAverage) + '%';
-  //   return votePercentage;
-  // };
   return (
     <>
       <div>
@@ -65,22 +46,49 @@ const CourseDetails = () => {
         </Button>
       </div>
       <section className={styles.section}>
-        {loading && <Spiner />}
-        <p>{courseId}</p>
+        {courseDetails ? (
+          <>
+            <ul className={styles.list}>
+              <li className={styles.item}>
+                <h2 className={styles.filmTitle}>
+                  Course: {courseDetails.title}
+                </h2>
 
-        <ul className={styles.list}>
-          <li className={styles.item}>
-            <h2 className={styles.filmTitle}>{title}</h2>
-            <p>Vote average: </p>
-          </li>
-          <li className={styles.item}>
-            <h3 className={styles.title}>Overviews</h3>
-          </li>
-          <li className={styles.item}>
-            <h3 className={styles.title}>Genres</h3>
-          </li>
-        </ul>
+                <video controls></video>
+                <source src={firstVideoLink} type="video/webm" />
+              </li>
+              <li className={styles.item}>
+                <ol className={styles.listLessons}>
+                  {courseDetails.lessons.map(({ id, title }) => {
+                    return (
+                      <li className={styles.itemLessons} key={id}>
+                        <Button
+                          variant="text"
+                          color="secondary"
+                          className={styles.link}
+                          onClick={()=>setShowLesson(true)}
+                        >
+                          {title}
+                        </Button>
+                      </li>
+                    );
+                  })}
+                </ol>
+              </li>
+              <li className={styles.item}>
+                <p className={styles.title}>
+                  Description: {courseDetails.description}
+                </p>
+              </li>
+            </ul>
+            {showLesson && <LessonDetails />}
+          </>
+        ) : (
+          <Spiner />
+        )}
       </section>
+
+      <Outlet />
     </>
   );
 };
