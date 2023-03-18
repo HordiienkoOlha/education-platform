@@ -14,17 +14,6 @@
   padding: 10px;
 }
 
-.itemContent {
-
-}
-
-
-
-/* .itemContent:focus,
-.itemContent:hover {
-  scale: 1.1;
-} */
-
 .item:last-child {
   margin-bottom: 0;
 }

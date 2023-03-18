@@ -1,11 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-  useParams,
-  useNavigate,
-  // Link,
-  useLocation,
-  Outlet,
-} from 'react-router-dom';
+import { useParams, useNavigate, Outlet } from 'react-router-dom';
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 
 import * as api from '../../services/api';
@@ -18,10 +12,11 @@ import LessonDetails from 'components/LessonDetails';
 const CourseDetails = () => {
   const [courseDetails, setCourseDetails] = useState(null);
   const [firstVideoLink, setFirstVideoLink] = useState('');
-  const [showLesson, setShowLesson] = useState(false);
+  const [showToggle, setShowToggle] = useState(false);
+  const [lesson, setLesson] = useState(null);
+  const [lessonIndex, setLessonIndex] = useState();
 
   const { courseId } = useParams();
-  // const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,8 +25,6 @@ const CourseDetails = () => {
       setFirstVideoLink(data.lessons[0].link);
     });
   }, [courseId]);
-
-  // data.lessons.filter(({status})=>{if{status === "locked"}})
 
   return (
     <>
@@ -54,19 +47,36 @@ const CourseDetails = () => {
                   Course: {courseDetails.title}
                 </h2>
 
-                <video controls></video>
-                <source src={firstVideoLink} type="video/webm" />
+                <video controls>
+                  <source src={firstVideoLink} type="video/webm" />
+                </video>
+              </li>
+              <li className={styles.item}>
+                <p className={styles.title}>
+                  Description: {courseDetails.description}
+                </p>
               </li>
               <li className={styles.item}>
                 <ol className={styles.listLessons}>
-                  {courseDetails.lessons.map(({ id, title }) => {
+                  {courseDetails.lessons.map((lesson, index) => {
+                    const { id, title } = lesson;
                     return (
                       <li className={styles.itemLessons} key={id}>
                         <Button
                           variant="text"
                           color="secondary"
                           className={styles.link}
-                          onClick={()=>setShowLesson(true)}
+                          onClick={() => {
+                            console.log('lesson.status', lesson.status);
+                            setLesson(lesson);
+                            setLessonIndex(index + 1);
+                            if (lesson.status === 'locked') {
+                              setShowToggle(false);
+                            }
+                            if (lesson.status === 'unlocked') {
+                              setShowToggle(true);
+                            }
+                          }}
                         >
                           {title}
                         </Button>
@@ -75,13 +85,12 @@ const CourseDetails = () => {
                   })}
                 </ol>
               </li>
-              <li className={styles.item}>
-                <p className={styles.title}>
-                  Description: {courseDetails.description}
-                </p>
-              </li>
             </ul>
-            {showLesson && <LessonDetails />}
+            {showToggle ? (
+              <LessonDetails lesson={lesson} lessonIndex={lessonIndex} />
+            ) : (
+              <p>This lesson is blocked</p>
+            )}
           </>
         ) : (
           <Spiner />

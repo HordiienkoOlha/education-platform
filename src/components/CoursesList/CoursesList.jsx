@@ -13,7 +13,7 @@ const CoursesList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const {
     firstContentIndex,
     lastContentIndex,
@@ -64,45 +64,35 @@ const CoursesList = () => {
                           meta,
                           rating,
                         }) => {
-                          // const { skills, courseVideoPreview } = meta;
                           const { skills } = meta;
                           return (
                             <li key={id} className={styles.item}>
-                              {/* <Link to={`/courses/${id}`}> */}
-                                {/* <div className={styles.itemContent}> */}
-                                <img
-                                  src={`${previewImageLink}/cover.webp`}
-                                  alt={title}
-                                  className={styles.image}
-                                />
+                              <img
+                                src={`${previewImageLink}/cover.webp`}
+                                alt={title}
+                                className={styles.image}
+                              />
 
-                                <div className={styles.content}>
-                                  {/* <div className={styles.contentTitleWrapper}> */}
-
-                                  <h2 className={styles.contentTitle}>
-                                    {title}
-                                  </h2>
-                                  {/* </div> */}
-                                  <p className={styles.contentText}>
-                                    LessonsCount: {lessonsCount}
-                                  </p>
-                                  <h3 className={styles.contentText}>
-                                    Skills:
-                                  </h3>
-                                  <ul className={styles.contentText}>
-                                    {skills?.map((skill, index) => (
-                                      <li key={index}>- {skill}</li>
-                                    ))}
-                                  </ul>
-                                  <p className={styles.contentText}>
-                                    Rating: {rating}
-                                  </p>
-                                </div>
-                                <div>
-                                  {/* <VideoPlayer
+                              <div className={styles.content}>
+                                <h2 className={styles.contentTitle}>{title}</h2>
+                                <p className={styles.contentText}>
+                                  LessonsCount: {lessonsCount}
+                                </p>
+                                <h3 className={styles.contentText}>Skills:</h3>
+                                <ul className={styles.contentText}>
+                                  {skills?.map((skill, index) => (
+                                    <li key={index}>- {skill}</li>
+                                  ))}
+                                </ul>
+                                <p className={styles.contentText}>
+                                  Rating: {rating}
+                                </p>
+                              </div>
+                              <div>
+                                {/* <VideoPlayer
                                     courseVideoPreview={courseVideoPreview}
                                   /> */}
-                                  {/* <div className="player-wrapper">
+                                {/* <div className="player-wrapper">
                                     <ReactPlayer
                                       className="react-player"
                                       url={courseVideoPreview.link}
@@ -110,13 +100,14 @@ const CoursesList = () => {
                                       height="100%"
                                     />
                                   </div> */}
-                                <Button variant="outlined" color="warning"
-                                  onClick={()=>navigate(`/${id}`)}>
-                                    Course details
-                                  </Button>
-                                  {/* </div> */}
-                                </div>
-                              {/* </Link> */}
+                                <Button
+                                  variant="outlined"
+                                  color="warning"
+                                  onClick={() => navigate(`/${id}`)}
+                                >
+                                  Course details
+                                </Button>
+                              </div>
                             </li>
                           );
                         }
