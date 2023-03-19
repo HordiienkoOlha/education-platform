@@ -7,7 +7,6 @@ import Spiner from 'components/Spiner';
 import styles from './CoursesList.module.css';
 import scrollToTop from 'helpers/scrollToTop';
 import { useNavigate } from 'react-router-dom';
-import VideoPlayer from 'components/VideoPlayer/VideoPlayer';
 import VideoPlayerWithHover from 'components/VideoPlayerWithHover/VideoPlayerWithHover';
 
 const CoursesList = () => {
@@ -58,7 +57,7 @@ const CoursesList = () => {
           <h2>Error fetching users</h2>
         ) : (
           <>
-            {courses && (
+            {courses.length > 1 && (
               <div>
                 <h1 className={styles.title}>Courses</h1>
                 <div className={styles.listWrapper}>
@@ -116,52 +115,54 @@ const CoursesList = () => {
                       )}
                   </ul>
                 </div>
-                <div className={styles.pagination}>
-                  <button
-                    onClick={prevPage}
-                    className={`page ${page === 1 && 'disabled'}`}
-                  >
-                    &larr;
-                  </button>
-                  <button
-                    onClick={() => {
-                      setPage(1);
-                      scrollToTop();
-                    }}
-                    className={`page ${page === 1 && 'disabled'}`}
-                  >
-                    1
-                  </button>
-                  {gaps.before ? '...' : null}
-                  {gaps.paginationGroup.map(course => (
+                {courses.length > 10 && (
+                  <div className={styles.pagination}>
+                    <button
+                      onClick={prevPage}
+                      className={`page ${page === 1 && 'disabled'}`}
+                    >
+                      &larr;
+                    </button>
                     <button
                       onClick={() => {
-                        setPage(course);
+                        setPage(1);
                         scrollToTop();
                       }}
-                      key={course}
-                      className={`page ${page === course ? 'active' : ''}`}
+                      className={`page ${page === 1 && 'disabled'}`}
                     >
-                      {course}
+                      1
                     </button>
-                  ))}
-                  {gaps.after ? '...' : null}
-                  <button
-                    onClick={() => {
-                      setPage(totalPages);
-                      scrollToTop();
-                    }}
-                    className={`page ${page === totalPages && 'disabled'}`}
-                  >
-                    {totalPages}
-                  </button>
-                  <button
-                    onClick={nextPage}
-                    className={`page ${page === totalPages && 'disabled'}`}
-                  >
-                    &rarr;
-                  </button>
-                </div>
+                    {gaps.before ? '...' : null}
+                    {gaps.paginationGroup.map(course => (
+                      <button
+                        onClick={() => {
+                          setPage(course);
+                          scrollToTop();
+                        }}
+                        key={course}
+                        className={`page ${page === course ? 'active' : ''}`}
+                      >
+                        {course}
+                      </button>
+                    ))}
+                    {gaps.after ? '...' : null}
+                    <button
+                      onClick={() => {
+                        setPage(totalPages);
+                        scrollToTop();
+                      }}
+                      className={`page ${page === totalPages && 'disabled'}`}
+                    >
+                      {totalPages}
+                    </button>
+                    <button
+                      onClick={nextPage}
+                      className={`page ${page === totalPages && 'disabled'}`}
+                    >
+                      &rarr;
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </>

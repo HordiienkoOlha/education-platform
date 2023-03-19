@@ -11,14 +11,20 @@ const VideoPlayerWithHover = ({ videoSrc }) => {
       hls.loadSource(videoSrc);
       hls.attachMedia(videoRef.current);
       return () => hls.destroy();
-    } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
+    } else if (videoRef.current.canPlayType("application/vnd.apple.mpegurl")) {
       videoRef.current.src = videoSrc;
     }
   }, [videoSrc]);
 
   const handleMouseEnter = () => {
     setIsPlaying(true);
-    videoRef.current.play();
+    if (videoRef.current.readyState >= 2) {
+      videoRef.current.play();
+    } else {
+      videoRef.current.oncanplay = () => {
+        videoRef.current.play();
+      };
+    }
   };
 
   const handleMouseLeave = () => {
@@ -29,7 +35,7 @@ const VideoPlayerWithHover = ({ videoSrc }) => {
 
   return (
     <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <video ref={videoRef} muted controls={isPlaying} width={300}></video>
+      <video ref={videoRef} muted controls={!isPlaying} width={300}></video>
     </div>
   );
 };
