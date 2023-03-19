@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import usePagination from 'hooks/usePagination';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 import * as api from 'services/api';
-import Spiner from 'components/Spiner';
-import styles from './CoursesList.module.css';
+import usePagination from 'hooks/usePagination';
 import scrollToTop from 'helpers/scrollToTop';
-import { useNavigate } from 'react-router-dom';
+import Spiner from 'components/Spiner';
 import VideoPlayerWithHover from 'components/VideoPlayerWithHover/VideoPlayerWithHover';
+import styles from './CoursesList.module.css';
 
 const CoursesList = () => {
   const [courses, setCourses] = useState([]);
@@ -39,7 +39,6 @@ const CoursesList = () => {
           setError(error.response.data.message);
         } else if (error.request) {
           // Обробка помилки мережі
-
           setError('Помилка мережі');
         } else {
           // Інші помилки
@@ -49,8 +48,8 @@ const CoursesList = () => {
       .finally(setLoading(false));
   }, []);
   return (
-    // <section className="Courses">
     <section className={styles.section}>
+      {error && <p>{error}</p>}
       {loading ? (
         <Spiner />
       ) : error ? (
@@ -74,7 +73,6 @@ const CoursesList = () => {
                         rating,
                       }) => {
                         const { skills } = meta;
-                        // console.log(meta.courseVideoPreview.link)
                         return (
                           <li key={id} className={styles.item}>
                             <img
@@ -82,26 +80,27 @@ const CoursesList = () => {
                               alt={title}
                               className={styles.image}
                             />
-
                             <div className={styles.content}>
                               <h2 className={styles.contentTitle}>{title}</h2>
                               <ul>
                                 <li>
                                   <p className={styles.contentText}>
-                                    LessonsCount: {lessonsCount}
+                                    Lessons count: {lessonsCount}
                                   </p>
                                 </li>
-                                <li></li>
-
                                 <li>
-                                  <h3 className={styles.contentText}>
-                                    Skills:
-                                  </h3>
-                                  <ul className={styles.contentText}>
-                                    {skills?.map((skill, index) => (
-                                      <li key={index}>- {skill}</li>
-                                    ))}
-                                  </ul>
+                                  {skills && (
+                                    <div>
+                                      <h3 className={styles.contentText}>
+                                        Skills:
+                                      </h3>
+                                      <ul className={styles.contentText}>
+                                        {skills?.map((skill, index) => (
+                                          <li key={index}>- {skill}</li>
+                                        ))}
+                                      </ul>
+                                    </div>
+                                  )}
                                 </li>
                                 <li>
                                   <p className={styles.contentText}>
@@ -109,17 +108,24 @@ const CoursesList = () => {
                                   </p>
                                 </li>
                                 <li>
-                                  <div className={styles.videoWrapper}>
-                                    <VideoPlayerWithHover
-                                      videoSrc={meta.courseVideoPreview.link}
-                                    />
-                                  </div>
+                                  {meta?.courseVideoPreview?.link ? (
+                                    <div className={styles.videoWrapper}>
+                                      <VideoPlayerWithHover
+                                        videoSrc={meta.courseVideoPreview.link}
+                                      />
+                                    </div>
+                                  ) : (
+                                    <p>
+                                      The video is not available for viewing
+                                    </p>
+                                  )}
                                 </li>
                                 <li>
                                   <Button
                                     variant="outlined"
                                     color="warning"
                                     onClick={() => navigate(`/${id}`)}
+                                    className={styles.button}
                                   >
                                     Course details
                                   </Button>
@@ -185,7 +191,6 @@ const CoursesList = () => {
         </>
       )}
     </section>
-    // </section>
   );
 };
 export default CoursesList;

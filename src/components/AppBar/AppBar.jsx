@@ -1,5 +1,5 @@
-import { Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
+import { Outlet } from 'react-router-dom';
 
 import Spinner from 'components/Spiner';
 import Navigation from 'components/Navigation/Navigation';
@@ -13,11 +13,9 @@ const AppBar = () => {
           <Navigation />
         </Container>
       </header>
-      <Container>
-        <Suspense fallback={<Spinner />}>
-          <Outlet />
-        </Suspense>
-      </Container>
+      <Suspense fallback={<Spinner />}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };

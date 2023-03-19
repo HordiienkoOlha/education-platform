@@ -67,11 +67,8 @@ const CourseDetails = () => {
                     return (
                       <li className={styles.itemLessons} key={id}>
                         <button
-                          // variant="text"
-                          // color="secondary"
                           className={styles.button}
                           onClick={() => {
-                            console.log('lesson.status', lesson.status);
                             setLesson(lesson);
                             setLessonIndex(index + 1);
                             setShowLesson(true);
@@ -93,7 +90,7 @@ const CourseDetails = () => {
               <div className={styles.item}>
                 {showLesson &&
                   (showToggle ? (
-                    <LessonDetails lesson={lesson} lessonIndex={lessonIndex} />
+                    <LessonDetails lesson={lesson} lessonIndex={lessonIndex} courseId={courseId}/>
                   ) : (
                     <p>Lesson {lessonIndex} is locked</p>
                   ))}

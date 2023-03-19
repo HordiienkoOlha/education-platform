@@ -9,7 +9,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .title {
@@ -23,7 +22,6 @@
 
   display: flex;
   list-style: none;
-  /* margin-left: 20px; */
   margin: 0 0 0 20px;
 }
 
@@ -33,7 +31,6 @@
   align-content: baseline;
   color: var(--icon-color);
   vertical-align: bottom;
-  /* margin-left: 20px; */
 }
 .icon :hover,
 .icon:focus {
@@ -54,10 +51,6 @@
   color: var(--accent-color);
 }
 
-.active-link {
-  composes: link;
-  /* color: var(--accent-color); */
-}
 @media screen and (min-width: 375px) {
   .movie {
     margin-left: 50px;

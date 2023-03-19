@@ -1,21 +1,21 @@
-import scrollToTop from 'helpers/scrollToTop';
 import { useState, useEffect } from 'react';
+import scrollToTop from 'helpers/scrollToTop';
 
 const usePagination = ({ contentPerPage, count }) => {
   const [page, setPage] = useState(1);
-  // like 3 dots that surrounds the immediate pages
+  // 3 крапки, які оточують найближчі сторінки
   const [gaps, setGaps] = useState({
     before: false,
     paginationGroup: [],
     after: true,
   });
-  // number of pages in total (total items / content on each page)
+  // загальна кількість сторінок (загальна кількість елементів / вміст на кожній сторінці)
   const pageCount = Math.ceil(count / contentPerPage);
-  // index of last item of current page
+
   const lastContentIndex = page * contentPerPage;
-  // index of first item of current page
+
   const firstContentIndex = lastContentIndex - contentPerPage;
-  //Pages between the first and last pages
+
   const [pagesInBetween, setPagesInBetween] = useState([]);
 
   useEffect(() => {
@@ -25,8 +25,8 @@ const usePagination = ({ contentPerPage, count }) => {
     }
   }, [pageCount]);
 
-  // to set the pages between the gaps depending on position of current page
-  //and to setGaps Depending on position of current page
+  //щоб встановити сторінки між проміжками залежно від положення поточної сторінки
+  //і встановити крапки залежно від позиції поточної сторінки
   useEffect(() => {
     const currentLocation = pagesInBetween.indexOf(page);
     let paginationGroup = [];
@@ -64,19 +64,19 @@ const usePagination = ({ contentPerPage, count }) => {
     setGaps({ paginationGroup, before, after });
   }, [page, pagesInBetween, pageCount]);
 
-  // change page based on direction either front or back
+  // змінити сторінку залежно від напрямку передньої або зворотної сторони
   const changePage = direction => {
     setPage(state => {
-      // move forward
+      // йти далі
       if (direction) {
-        // if page is the last page, do nothing
+        // якщо сторінка остання, нічого не робити
         if (state === pageCount) {
           return state;
         }
         return state + 1;
-        // go back
+        // повернутися назад
       } else {
-        // if page is the first page, do nothing
+        // якщо сторінка є першою сторінкою, нічого не робити
         if (state === 1) {
           return state;
         }
@@ -86,10 +86,10 @@ const usePagination = ({ contentPerPage, count }) => {
   };
 
   const setPageSAFE = num => {
-    // if number is greater than number of pages, set to last page
+    // якщо кількість перевищує кількість сторінок, установити останню сторінку
     if (num > pageCount) {
       setPage(pageCount);
-      // if number is less than 1, set page to first page
+      // якщо число менше 1, установіть першу сторінку
     } else if (num < 1) {
       setPage(1);
     } else {

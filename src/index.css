@@ -46,7 +46,6 @@ li {
 }
 
 .page {
-  /* color: white; */
   height: 3rem;
   width: 3rem;
   display: flex;
@@ -54,7 +53,6 @@ li {
   justify-content: center;
   font-weight: bold;
   border: solid 0.2rem var(--accent-color);
-  /* background-color: transparent; */
   border-radius: 0.7rem;
   cursor: pointer;
 }
@@ -65,7 +63,6 @@ li {
 }
 
 .page.disabled {
-  /* background-color: transparent !important; */
   cursor: not-allowed;
   opacity: 0.5;
 }

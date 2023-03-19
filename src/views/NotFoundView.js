@@ -1,11 +1,14 @@
-import { Link } from "react-router-dom";
+import Container from 'components/Container';
+import { Link } from 'react-router-dom';
 
 const NotFoundView = () => {
   return (
-    <h1>
-      Page not found :(, go to
-      <Link to="/">Home</Link>
-    </h1>
+    <Container>
+      <h1>
+        Page not found :(, go to
+        <Link to="/">Home</Link>
+      </h1>
+    </Container>
   );
 };
 

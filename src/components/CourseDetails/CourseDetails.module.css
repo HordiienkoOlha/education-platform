@@ -1,52 +1,48 @@
-
-
-.buttonWrapper, .list, .title {
+.buttonWrapper,
+.list,
+.title {
   padding: 20px 0;
 }
 
-.item{
-    margin: 0 0 20px 0;
-    
+.item {
+  margin: 0 0 20px 0;
 }
 
-.item:last-child{
-    margin: 0;
+.item:last-child {
+  margin: 0;
 }
 
-.title{
-    font-weight: 400;
-    text-align: center;
+.title {
+  font-weight: 400;
+  text-align: center;
 }
 
-   .titleDetails, .titleLessons{
+.titleDetails,
+.titleLessons {
   font-weight: 700;
 }
-.itemLessons{
-    margin: 0 0 10px 0;
+.itemLessons {
+  margin: 0 0 10px 0;
 }
 
-.itemLessons:last-child{
-    margin: 0;
+.itemLessons:last-child {
+  margin: 0;
 }
 
-.button{
-    background-color: transparent;
-    padding: 10px 0;
-    color: inherit;
-    border: none;
+.button {
+  background-color: transparent;
+  padding: 10px 0;
+  color: inherit;
+  border: none;
 }
 
-.button:hover, .button:focus{
-    color: var(--icon-color);
+.button:hover,
+.button:focus {
+  color: var(--icon-color);
 }
 
 @media screen and (min-width: 768px) {
-
-.section {
+  .section {
     padding: 0 60px;
-}
-
-.itemLessons {
-    margin: 0 0 20px 0;
-}
+  }
 }

@@ -1,10 +1,10 @@
-import VideoPlayer from 'components/VideoPlayer/VideoPlayer';
 import PropTypes from 'prop-types';
 
+import VideoPlayerForLesson from 'components/VideoPlayerForLesson';
 import styles from './LessonDetails.module.css';
 
-const LessonDetails = ({ lesson, lessonIndex }) => {
-  // console.log(lesson);
+const LessonDetails = ({ lesson, lessonIndex, courseId }) => {
+  // console.log('courseId', courseId);
 
   return (
     <div className={styles.section}>
@@ -14,7 +14,11 @@ const LessonDetails = ({ lesson, lessonIndex }) => {
           <p>Lesson title: {lesson.title}</p>
         </li>
         <li className={styles.item}>
-          <VideoPlayer videoSrc={lesson.link} lessonIndex={lessonIndex} />
+          <VideoPlayerForLesson
+            videoSrc={lesson.link}
+            courseId={courseId}
+            lessonId={lesson.id}
+          />
         </li>
       </ul>
     </div>
