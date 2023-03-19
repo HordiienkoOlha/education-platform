@@ -37,6 +37,7 @@ body {
   letter-spacing: 0.03em;
   background-color: var(--primary-white-color);
   color: var(--secondary-text-color);
+  margin: 0;
 }
 
 a,

@@ -17,7 +17,7 @@ const VideoPlayer = ({ videoSrc }) => {
 
   return (
     <div>
-      <video ref={videoRef} controls width={300}></video>
+      <video ref={videoRef} controls width={250}></video>
     </div>
   );
 };

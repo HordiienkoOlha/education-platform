@@ -29,8 +29,8 @@ const CourseDetails = () => {
   }, [courseId]);
 
   return (
-    <>
-      <div>
+    <section className={styles.section}>
+      <div className={styles.buttonWrapper}>
         <Button
           variant="outlined"
           color="warning"
@@ -40,34 +40,36 @@ const CourseDetails = () => {
           &nbsp;Go back
         </Button>
       </div>
-      <section className={styles.section}>
+      <div>
         {courseDetails ? (
           <>
+            {/* <li className={styles.item}> */}
+            <h2 className={styles.title}>
+              <span className={styles.titleDetails}>Course: </span>
+              {courseDetails.title}
+            </h2>
+            {/* </li> */}
             <ul className={styles.list}>
               <li className={styles.item}>
-                <h2 className={styles.filmTitle}>
-                  Course: {courseDetails.title}
-                </h2>
                 <VideoPlayer videoSrc={firstVideoLink} />
-                {/* <video controls>
-                  <source src={firstVideoLink} type="video/webm" />
-                </video> */}
               </li>
               <li className={styles.item}>
-                <p className={styles.title}>
-                  Description: {courseDetails.description}
+                <p className={styles.description}>
+                  <span className={styles.titleDetails}>Description: </span>
+                  {courseDetails.description}
                 </p>
               </li>
               <li className={styles.item}>
+                <h3 className={styles.titleLessons}>Lessons:</h3>
                 <ol className={styles.listLessons}>
                   {courseDetails.lessons.map((lesson, index) => {
                     const { id, title } = lesson;
                     return (
                       <li className={styles.itemLessons} key={id}>
-                        <Button
-                          variant="text"
-                          color="secondary"
-                          className={styles.link}
+                        <button
+                          // variant="text"
+                          // color="secondary"
+                          className={styles.button}
                           onClick={() => {
                             console.log('lesson.status', lesson.status);
                             setLesson(lesson);
@@ -82,27 +84,29 @@ const CourseDetails = () => {
                           }}
                         >
                           {title}
-                        </Button>
+                        </button>
                       </li>
                     );
                   })}
                 </ol>
               </li>
+              <div className={styles.item}>
+                {showLesson &&
+                  (showToggle ? (
+                    <LessonDetails lesson={lesson} lessonIndex={lessonIndex} />
+                  ) : (
+                    <p>Lesson {lessonIndex} is locked</p>
+                  ))}
+              </div>
             </ul>
-            {showLesson &&
-              (showToggle ? (
-                <LessonDetails lesson={lesson} lessonIndex={lessonIndex} />
-              ) : (
-                <p>This lesson is blocked</p>
-              ))}
           </>
         ) : (
           <Spiner />
         )}
-      </section>
+      </div>
 
       <Outlet />
-    </>
+    </section>
   );
 };
 

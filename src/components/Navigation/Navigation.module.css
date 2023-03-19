@@ -7,21 +7,24 @@
 
 .content {
   display: flex;
-  /* margin-left: auto;
-  margin-right: auto; */
-  
+  justify-content: center;
+  align-items: center;
+
 }
 
 .title {
   color: var(--icon-color);
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  font-size: 35px;
+  font-size: 12px;
   line-height: 1.19;
+
+  vertical-align: middle;
 
   display: flex;
   list-style: none;
-  margin-left: 20px;
+  /* margin-left: 20px; */
+  margin: 0 0 0 20px;
 }
 
 .icon {
@@ -43,7 +46,7 @@
   padding: 12px;
   font-weight: 900;
   color: var(--icon-color);
-  font-size: 18px;
+  font-size: 12px;
 }
 
 .link:focus,

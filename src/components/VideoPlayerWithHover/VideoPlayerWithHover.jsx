@@ -4,8 +4,10 @@ import Hls from 'hls.js';
 const VideoPlayerWithHover = ({ videoSrc }) => {
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
+     try {
     if (Hls.isSupported()) {
       const hls = new Hls();
       hls.loadSource(videoSrc);
@@ -13,6 +15,10 @@ const VideoPlayerWithHover = ({ videoSrc }) => {
       return () => hls.destroy();
     } else if (videoRef.current.canPlayType("application/vnd.apple.mpegurl")) {
       videoRef.current.src = videoSrc;
+       }
+           } catch (error) {
+      console.error(error);
+      // Обробити помилку 404 тут
     }
   }, [videoSrc]);
 
@@ -34,9 +40,11 @@ const VideoPlayerWithHover = ({ videoSrc }) => {
   };
 
   return (
+    <>
     <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <video ref={videoRef} muted controls={!isPlaying} width={300}></video>
-    </div>
+      <video ref={videoRef} muted controls={!isPlaying} width={250}></video>
+      </div>
+    </>
   );
 };
 
