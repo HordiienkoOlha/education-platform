@@ -7,6 +7,8 @@ import Spiner from 'components/Spiner';
 import styles from './CoursesList.module.css';
 import scrollToTop from 'helpers/scrollToTop';
 import { useNavigate } from 'react-router-dom';
+import VideoPlayer from 'components/VideoPlayer/VideoPlayer';
+import VideoPlayerWithHover from 'components/VideoPlayerWithHover/VideoPlayerWithHover';
 
 const CoursesList = () => {
   const [courses, setCourses] = useState([]);
@@ -29,15 +31,23 @@ const CoursesList = () => {
   });
 
   useEffect(() => {
-    (async () => {
-      try {
-        await api.fetchCourses().then(setCourses);
-      } catch {
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    })();
+    api
+      .fetchCourses()
+      .then(setCourses)
+      .catch(error => {
+        if (error.response) {
+          // Обробка відповіді з помилкою
+          setError(error.response.data.message);
+        } else if (error.request) {
+          // Обробка помилки мережі
+
+          setError('Помилка мережі');
+        } else {
+          // Інші помилки
+          setError('Помилка: ' + error.message);
+        }
+      })
+      .finally(setLoading(false));
   }, []);
   return (
     <div className="Courses">
@@ -89,17 +99,9 @@ const CoursesList = () => {
                                 </p>
                               </div>
                               <div>
-                                {/* <VideoPlayer
-                                    courseVideoPreview={courseVideoPreview}
-                                  /> */}
-                                {/* <div className="player-wrapper">
-                                    <ReactPlayer
-                                      className="react-player"
-                                      url={courseVideoPreview.link}
-                                      width="100%"
-                                      height="100%"
-                                    />
-                                  </div> */}
+                                <VideoPlayerWithHover
+                                  videoSrc={meta.courseVideoPreview.link}
+                                />
                                 <Button
                                   variant="outlined"
                                   color="warning"

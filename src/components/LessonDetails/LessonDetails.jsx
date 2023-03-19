@@ -1,3 +1,4 @@
+import VideoPlayer from 'components/VideoPlayer/VideoPlayer';
 import PropTypes from 'prop-types';
 
 const LessonDetails = ({ lesson, lessonIndex }) => {
@@ -7,9 +8,7 @@ const LessonDetails = ({ lesson, lessonIndex }) => {
     <>
       <h3>Lesson {lessonIndex} </h3>
       <p>{lesson.title}</p>
-      <video controls>
-        <source src={lesson.link} />
-      </video>
+      <VideoPlayer videoSrc={lesson.link} lessonIndex={lessonIndex} />
     </>
   );
 };

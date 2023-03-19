@@ -1,56 +1,25 @@
-// import React, { useState } from 'react';
+import React, { useEffect, useRef } from 'react';
+import Hls from 'hls.js';
 
-// export dafault VideoPlayer = ({ firstVideoLink }) => {
-//   // console.log(courseVideoPreview)
+const VideoPlayer = ({ videoSrc }) => {
+  const videoRef = useRef(null);
 
-//       // const { link, previewImageLink}=courseVideoPreview
-//   const [videoUrl, setVideoUrl] = useState(courseVideoPreview.link);
+  useEffect(() => {
+    if (Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(videoSrc);
+      hls.attachMedia(videoRef.current);
+      return () => hls.destroy();
+    } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
+      videoRef.current.src = videoSrc;
+    }
+  }, [videoSrc]);
 
-//   function handleVideoLoad(event) {
-//     setVideoUrl(URL.createObjectURL(event.target.files[0]));
-//   }
+  return (
+    <div>
+      <video ref={videoRef} controls width={300}></video>
+    </div>
+  );
+};
 
-//   function handleMouseEnter() {
-//     const video = document.getElementById('video');
-//     video.muted = false;
-//     video.play();
-//   }
-
-//   function handleMouseLeave() {
-//     const video = document.getElementById('video');
-//     video.muted = true;
-//     video.pause();
-//     video.currentTime = 0;
-//   }
-//     const videoEl = document.getElementById('video');
-
-// videoEl.muted = true;
-// videoEl.play();
-
-// document.body.addEventListener('mouseover', () => {
-//   videoEl.muted = false;
-// });
-
-  // return (
-  //   <div>
-      {/* <video
-        id="video"
-        controls
-        src={videoUrl}
-        // poster={`${previewImageLink}.webp`}
-        autoPlay="true"
-        muted="true"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onChange={handleVideoLoad}
-      /> */}
-//       <video controls src={firstVideoLink} ></video>
-//       <video controls autoPlay={true} muted={true}>
-//         <source
-//           src={firstVideoLink}
-//           type="video/webm"
-//         />
-//       </video>
-//     </div>
-//   );
-// };
+export default VideoPlayer;

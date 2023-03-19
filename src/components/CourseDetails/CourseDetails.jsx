@@ -8,11 +8,13 @@ import styles from './CourseDetails.module.css';
 import Spiner from 'components/Spiner';
 import { Button } from '@mui/material';
 import LessonDetails from 'components/LessonDetails';
+import VideoPlayer from 'components/VideoPlayer/VideoPlayer';
 
 const CourseDetails = () => {
   const [courseDetails, setCourseDetails] = useState(null);
   const [firstVideoLink, setFirstVideoLink] = useState('');
   const [showToggle, setShowToggle] = useState(false);
+  const [showLesson, setShowLesson] = useState(false);
   const [lesson, setLesson] = useState(null);
   const [lessonIndex, setLessonIndex] = useState();
 
@@ -46,10 +48,10 @@ const CourseDetails = () => {
                 <h2 className={styles.filmTitle}>
                   Course: {courseDetails.title}
                 </h2>
-
-                <video controls>
+                <VideoPlayer videoSrc={firstVideoLink} />
+                {/* <video controls>
                   <source src={firstVideoLink} type="video/webm" />
-                </video>
+                </video> */}
               </li>
               <li className={styles.item}>
                 <p className={styles.title}>
@@ -70,6 +72,7 @@ const CourseDetails = () => {
                             console.log('lesson.status', lesson.status);
                             setLesson(lesson);
                             setLessonIndex(index + 1);
+                            setShowLesson(true);
                             if (lesson.status === 'locked') {
                               setShowToggle(false);
                             }
@@ -86,11 +89,12 @@ const CourseDetails = () => {
                 </ol>
               </li>
             </ul>
-            {showToggle ? (
-              <LessonDetails lesson={lesson} lessonIndex={lessonIndex} />
-            ) : (
-              <p>This lesson is blocked</p>
-            )}
+            {showLesson &&
+              (showToggle ? (
+                <LessonDetails lesson={lesson} lessonIndex={lessonIndex} />
+              ) : (
+                <p>This lesson is blocked</p>
+              ))}
           </>
         ) : (
           <Spiner />
